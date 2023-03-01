@@ -23,7 +23,7 @@ In the support folderm you have all general methods used within different test c
 ## Instructions
 
 Clone locally the repository from here:
-`https://github.com/spring-petclinic/spring-petclinic-rest`
+`https://github.com/cristinavelican/SpringPetClinicRest.git`
 In order to run it locally do the following:
 
 * open GitBash
