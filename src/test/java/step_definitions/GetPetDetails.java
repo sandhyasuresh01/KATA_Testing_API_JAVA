@@ -35,22 +35,16 @@ public class GetPetDetails {
     Pets[] petsResponseArray;
     //imp
     @Given("Send GetOwner and request with valid endpoint")
-    public void getownerPetDetails() throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException {
-
+    public void getOwnerPetDetails() throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException {
         getOwnerDetails();
         getPetsTypeDetails();
         getPetsDetails();
-        //createPetDetails();
-
-
-
     }
 
     @Then("Create pet details with owner details")
     public void postCreatePetDetails() throws IOException, TransformerException, ParserConfigurationException, SAXException, JSONException {
         try {
             createPetDetails();
-
         } catch (Exception ex) {
             LOGGER.error("Execution of http method  returned HTTP status code: " + ex.getMessage());
         }
@@ -61,7 +55,6 @@ public class GetPetDetails {
         GetPetAPI.getPetsTypedetails();
         petTypeResponseArray = objectMapper.readValue(GetPetAPI.MessageResponse, PetType[].class);
         if (petTypeResponseArray != null && petTypeResponseArray.length > 1) {
-            // PetType petTypeobj = null;
             for (int i = 0; i < petTypeResponseArray.length; i++) {
                 petTypeobj = petTypeResponseArray[i];
                 LOGGER.info("owner object value at [" + i + "] is : " + petTypeobj.toString());
@@ -79,10 +72,9 @@ public class GetPetDetails {
                 ownerObj = ownerResponseArray[i];
                 LOGGER.info("owner object value at [" + i + "] is : " + ownerObj.toString());
             }
-
-
         }
     }
+
     public void getPetsDetails() throws JAXBException, JSONException, IOException {
         GetPetAPI.getPets();
         petsResponseArray = objectMapper.readValue(GetPetAPI.MessageResponse, Pets[].class);
@@ -106,7 +98,6 @@ public class GetPetDetails {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         ExpectedFinaladdpet.remove("type");
         if (petTypeResponseArray != null && petTypeResponseArray.length > 1) {
-            // PetType petTypeobj = null;
             for (int i = 0; i < petTypeResponseArray.length; i++) {
                 petTypeobj = petTypeResponseArray[i];
                 LOGGER.info("owner object value at [" + i + "] is : " + petTypeobj.toString());
@@ -118,20 +109,12 @@ public class GetPetDetails {
             }
 
         }
-        String finalpayload = gson.toJson(ExpectedFinaladdpet);
-        GetPetAPI.createPet(finalpayload);
+        String finalPayLoad = gson.toJson(ExpectedFinaladdpet);
+        GetPetAPI.createPet(finalPayLoad);
     }
 
     @Then("validate 201 response")
     public void validateResponse() throws IOException, TransformerException, ParserConfigurationException, SAXException, JSONException {
-        try{
-            int Statuscode = GetPetAPI.statusCode;
-            assertEquals(201, Statuscode);
-            System.out.println("StatusCode from getPetDetails" + Statuscode);
-        }
-        catch (Exception ex) {
-            LOGGER.error("Execution of http method  returned HTTP status code: " + ex.getMessage());
-        }
-
+        assertEquals(201, GetPetAPI.statusCode);
     }
 }
