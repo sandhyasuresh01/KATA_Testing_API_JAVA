@@ -1,0 +1,27 @@
+{
+  "birthDate": "2010-09-07",
+  "id": "3",
+  "name": "Leo",
+  "owner": {
+    "address": "110 W. Liberty St.",
+    "city": "Madison",
+    "firstName": "George",
+    "id": 1,
+    "lastName": "Franklin",
+    "pets": [
+      null
+    ],
+    "telephone": "6085551023"
+  },
+  "type": {
+    "id": 4,
+    "name": "snake"
+  },
+  "visits": [
+    {
+      "date": "2023/06/27",
+      "description": "Test",
+      "id": 1
+    }
+  ]
+}
