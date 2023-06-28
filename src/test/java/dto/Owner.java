@@ -1,58 +1,41 @@
 package dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Owner {
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private String address;
     private String city;
     private String telephone;
 
-    public int getId() {
-        return id;
-    }
+    @JsonProperty("id")
+    public void setID(long value) { this.id = value; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @JsonProperty("firstName")
+    public String getFirstName() { return firstName; }
+    @JsonProperty("firstName")
+    public void setFirstName(String value) { this.firstName = value; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @JsonProperty("lastName")
+    public String getLastName() { return lastName; }
+    @JsonProperty("lastName")
+    public void setLastName(String value) { this.lastName = value; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    @JsonProperty("address")
+    public String getAddress() { return address; }
+    @JsonProperty("address")
+    public void setAddress(String value) { this.address = value; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    @JsonProperty("city")
+    public String getCity() { return city; }
+    @JsonProperty("city")
+    public void setCity(String value) { this.city = value; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    @JsonProperty("telephone")
+    public String getTelephone() { return telephone; }
+    @JsonProperty("telephone")
+    public void setTelephone(String value) { this.telephone = value; }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
 }
