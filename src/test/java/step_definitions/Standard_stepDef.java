@@ -1,8 +1,6 @@
 package step_definitions;
 
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import org.junit.Assert;
 
 public class Standard_stepDef {
 
@@ -21,13 +19,4 @@ public class Standard_stepDef {
     public static void setResource(String resource) {
         Standard_stepDef.resource = resource;
     }
-
-//    @Then("^the response code should be \"([^\"]*)\"$")
-//    public void theResponseCodeShouldBe(String responseCode)  {
-//        System.out.println("Returned response code : " + SupportFunctions.getResponseCode());
-//        Assert.assertEquals("Response code not as expected | ",
-//                responseCode,
-//                SupportFunctions.getResponseCode()
-//        );
-//    }
 }
