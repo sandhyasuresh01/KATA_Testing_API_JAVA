@@ -49,14 +49,16 @@ public class SpecialitiesStepDefinition {
             LOGGER.error("Execution of http method  returned HTTP status code: " + ex.getMessage());
         }
 
-        JsonParser parserobj = new JsonParser();
-        JsonElement jsonEleObject = parserobj.parse(specialitiesStore);
+        JsonParser parserObj = new JsonParser();
+        JsonElement jsonEleObject = parserObj.parse(specialitiesStore);
+
         for (int i = 0; i < jsonEleObject.getAsJsonArray().size(); i++) {
             var id_Key = jsonEleObject.getAsJsonArray().get(i).getAsJsonObject().get("id");
             var name_Key = jsonEleObject.getAsJsonArray().get(i).getAsJsonObject().get("name");
             specialitiesData.put("id", id_Key);
             specialitiesData.put("name", name_Key);
         }
+
         ExpectedResult1 = new Gson().fromJson(jsonRequestBody, JSONObject.class);
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         JSONArray jsonArray = new JSONArray();
@@ -80,17 +82,10 @@ public class SpecialitiesStepDefinition {
 
     @Then("Validate 201 OK in response")
     public void validateResponse() throws IOException, TransformerException, ParserConfigurationException, SAXException, JSONException {
-        try{
-            int Statuscode = GetVetAPI.statusCode;
-            assertEquals(201, Statuscode);
-            System.out.println("StatusCode from getPetDetails" + Statuscode);
+            assertEquals(201, GetVetAPI.statusCode);
             specialitiesStore = GetVetAPI.MessageResponse;
-        }
-        catch (Exception ex) {
-            LOGGER.error("Execution of http method  returned HTTP status code: " + ex.getMessage());
-        }
-
     }
+
     @Then("Validate Vet for each speciality")
     public void validateVetspecialityResponse() throws IOException, TransformerException, ParserConfigurationException, SAXException, JSONException, JAXBException {
 
