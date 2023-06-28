@@ -1,18 +1,18 @@
 package step_definitions;
 
 import API.GetPetAPI;
+import dto.Owners;
+import dto.PetType;
+import dto.Pets;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import dto.Owners;
-import dto.PetType;
-import dto.Pets;
+import net.minidev.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
@@ -24,20 +24,26 @@ import static org.junit.Assert.assertEquals;
 
 public class GetPetDetails {
     private static final Logger LOGGER = LogManager.getLogger(GetPetDetails.class);
-    PetType[] petTypeResponseArray;
-    JSONObject expectedFinalAddPetJSON;
-    Owners[] ownerResponseArray;
-    PetType petTypeobj = null;
-    Pets[] petsResponseArray;
     final ObjectMapper objectMapper = new ObjectMapper();
     String jsonCreateRequestBody;
 
+    JSONObject ExpectedFinaladdpet;
+    //imp
+    PetType petTypeobj = null;
+    PetType[] petTypeResponseArray;
+    Owners[] ownerResponseArray;
+    Pets[] petsResponseArray;
+    //imp
     @Given("Send GetOwner and request with valid endpoint")
     public void getownerPetDetails() throws IOException, ParserConfigurationException, SAXException, JSONException, JAXBException {
 
         getOwnerDetails();
         getPetsTypeDetails();
         getPetsDetails();
+        //createPetDetails();
+
+
+
     }
 
     @Then("Create pet details with owner details")
@@ -55,6 +61,7 @@ public class GetPetDetails {
         GetPetAPI.getPetsTypedetails();
         petTypeResponseArray = objectMapper.readValue(GetPetAPI.MessageResponse, PetType[].class);
         if (petTypeResponseArray != null && petTypeResponseArray.length > 1) {
+            // PetType petTypeobj = null;
             for (int i = 0; i < petTypeResponseArray.length; i++) {
                 petTypeobj = petTypeResponseArray[i];
                 LOGGER.info("owner object value at [" + i + "] is : " + petTypeobj.toString());
@@ -63,6 +70,7 @@ public class GetPetDetails {
     }
 
     public void getOwnerDetails() throws JAXBException, JSONException, IOException {
+
         GetPetAPI.getOwnerdetails();
         ownerResponseArray = objectMapper.readValue(GetPetAPI.MessageResponse, Owners[].class);
         if (ownerResponseArray != null && ownerResponseArray.length > 1) {
@@ -71,9 +79,10 @@ public class GetPetDetails {
                 ownerObj = ownerResponseArray[i];
                 LOGGER.info("owner object value at [" + i + "] is : " + ownerObj.toString());
             }
+
+
         }
     }
-
     public void getPetsDetails() throws JAXBException, JSONException, IOException {
         GetPetAPI.getPets();
         petsResponseArray = objectMapper.readValue(GetPetAPI.MessageResponse, Pets[].class);
@@ -85,37 +94,39 @@ public class GetPetDetails {
             }
         }
     }
-
     public void createPetDetails() throws JAXBException, JSONException, IOException {
+
         petTypeobj.getName();
         System.out.println(petTypeobj.getName());
         jsonCreateRequestBody = templates.MergeFrom.template("templates/CreaterequestPayload.json")
                 .withDefaultValuesFrom(templates.FieldValues.in("templates/CreaterequestPayload.properties"))
                 .withFieldsFrom(templates.FieldValues.in("templates/CreaterequestPayload.properties"));
 
-        expectedFinalAddPetJSON = new Gson().fromJson(jsonCreateRequestBody, JSONObject.class);
+        ExpectedFinaladdpet = new Gson().fromJson(jsonCreateRequestBody, JSONObject.class);
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        expectedFinalAddPetJSON.remove("type");
+        ExpectedFinaladdpet.remove("type");
         if (petTypeResponseArray != null && petTypeResponseArray.length > 1) {
+            // PetType petTypeobj = null;
             for (int i = 0; i < petTypeResponseArray.length; i++) {
                 petTypeobj = petTypeResponseArray[i];
                 LOGGER.info("owner object value at [" + i + "] is : " + petTypeobj.toString());
 
                 if(petTypeobj.getId()==3){
-                    expectedFinalAddPetJSON.put("type", petTypeResponseArray[i]);
+                    ExpectedFinaladdpet.put("type", petTypeResponseArray[i]);
                     break;
                 }
             }
+
         }
-        String finalPayLoad = gson.toJson(expectedFinalAddPetJSON);
-        GetPetAPI.createPet(finalPayLoad);
+        String finalpayload = gson.toJson(ExpectedFinaladdpet);
+        GetPetAPI.createPet(finalpayload);
     }
 
     @Then("validate 201 response")
     public void validateResponse() throws IOException, TransformerException, ParserConfigurationException, SAXException, JSONException {
         try{
             int Statuscode = GetPetAPI.statusCode;
-            assertEquals(200, Statuscode);
+            assertEquals(201, Statuscode);
             System.out.println("StatusCode from getPetDetails" + Statuscode);
         }
         catch (Exception ex) {
