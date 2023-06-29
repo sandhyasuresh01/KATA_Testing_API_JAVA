@@ -28,7 +28,6 @@ public class GetPetDetails {
     String jsonCreateRequestBody;
 
     JSONObject ExpectedFinaladdpet;
-    //imp
     PetType petTypeobj = null;
     PetType[] petTypeResponseArray;
     Owners[] ownerResponseArray;

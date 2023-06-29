@@ -1,0 +1,116 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2023-06-28T23:25:08.393Z",
+        "line": 2,
+        "name": "TC01_ Create VetDetails",
+        "description": "",
+        "id": "create-vetdetails-for-each-specialities-details;tc01--create-vetdetails",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 5197000000,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "Valid specialities exists and Perform Vet request with all info",
+            "match": {
+              "location": "step_definitions.SpecialitiesStepDefinition.getspecialitiesDetails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Validate 201 OK in response",
+            "match": {
+              "location": "step_definitions.SpecialitiesStepDefinition.validateResponse()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 52000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Validate Vet for each speciality",
+            "match": {
+              "location": "step_definitions.SpecialitiesStepDefinition.validateVetspecialityResponse()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Create VetDetails for each specialities details",
+    "description": "",
+    "id": "create-vetdetails-for-each-specialities-details",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/kss/CreateVet.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2023-06-28T23:25:13.768Z",
+        "line": 3,
+        "name": "Add new Pets with owner details and pet\u0027s category",
+        "description": "",
+        "id": "pets-apis;add-new-pets-with-owner-details-and-pet-s-category",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 333000000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Send GetOwner and request with valid endpoint",
+            "match": {
+              "location": "step_definitions.GetPetDetails.getOwnerPetDetails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 91000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Create pet details with owner details",
+            "match": {
+              "location": "step_definitions.GetPetDetails.postCreatePetDetails()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "validate 201 response",
+            "match": {
+              "location": "step_definitions.GetPetDetails.validateResponse()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Pets APIs",
+    "description": "",
+    "id": "pets-apis",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/com/kss/pets.feature",
+    "tags": []
+  }
+]
