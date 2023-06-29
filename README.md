@@ -1,5 +1,9 @@
 # KATA Testing JAVA
 
+![Screen Shot 2023-06-29 at 1 25 22 AM](https://github.com/sandhyasuresh01/KATA_Testing_API_JAVA/assets/137686400/91b7b0d0-eb50-4c9c-b162-ebdee87b617b)
+
+
+
 ## Framework structure
 
 The below framework can be used for API automation, using Java, Maven and  RestAssured (a Java DSL for easy testing of REST services)
